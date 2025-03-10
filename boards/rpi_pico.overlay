@@ -1,0 +1,38 @@
+&spi0 {
+        status = "okay";
+        cs-gpios = <&gpio0 17 GPIO_ACTIVE_LOW>;
+        can0: can@0 {
+                compatible = "microchip,mcp2515";
+                spi-max-frequency = <1000000>;
+                int-gpios = <&gpio0 20 GPIO_ACTIVE_LOW>;
+                status = "okay";
+                reg = <0x0>;
+                osc-freq = <8000000>;
+                bus-speed = <125000>;
+                sample-point = <875>;
+                can-transceiver {
+                        max-bitrate = <1000000>;
+                };
+        };
+};
+/ {
+        chosen {
+                zephyr,canbus = &can0;
+        };
+        aliases {
+                green-led = &led0;
+                red-led = &led1;
+        };
+        leds {
+                /delete-node/ led_0;
+                compatible = "gpio-leds";
+                led0: led_0 {
+                        gpios = <&gpio0 25 GPIO_ACTIVE_HIGH>;
+                        label = "LED0";
+                };
+                led1: led_1 {
+                        gpios = <&gpio0 26 GPIO_ACTIVE_LOW>;
+                        label = "LED1";
+                };
+        };
+};

@@ -1,0 +1,24 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build for rpi_pico",
+            "type": "shell",
+            "command": "west build -b rpi_pico -- -DCONF_FILE=\"prj_no_storage.conf\"",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "Flash with JLink",
+            "type": "shell",
+            "command": "IP=$(nslookup host.docker.internal | grep 'Address:' | grep -Eo '\\b([0-9]{1,3}\\.){3}[0-9]{1,3}\\b' | tail -n 1) && echo \"Using IP: $IP\" && west flash -r jlink -i $IP",
+            "group": "none",
+            "problemMatcher": []
+        }
+    ]
+} 
