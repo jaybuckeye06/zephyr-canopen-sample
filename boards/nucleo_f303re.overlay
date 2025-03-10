@@ -1,0 +1,40 @@
+/ {
+	chosen {
+		zephyr.canbus = &can1;
+	};
+
+    leds {
+        shield_red_led: led_3 {
+            gpios = <&gpioa 0x0 0x0>;
+            label = "Shield Red LED";
+        };
+
+        shield_green_led: led_4 {
+            gpios = <&gpioa 0x1 0x0>;
+            label = "Shield Green LED";
+        };
+
+        shield_blue_led: led_5 {
+            gpios = <&gpioa 0x4 0x0>;
+            label = "Shield Blue LED";
+        };
+    };
+};
+
+/ {
+    aliases {
+        green-led = &shield_green_led;
+        red-led = &shield_red_led;
+        led0 = &shield_red_led;
+        led1 = &shield_green_led;
+        led2 = &shield_blue_led;
+        sw0 = &user_button;
+    };
+};
+
+&can1 {
+	pinctrl-0 = <&can_rx_pb8 &can_tx_pb9>;
+	pinctrl-names = "default";
+	bus-speed = <125000>;
+	status = "okay";
+};

@@ -2,9 +2,21 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "Build for nucleo_f303re",
+            "type": "shell",
+            "command": "west build -b nucleo_f303re -p auto -- -DCONF_FILE=\"prj_no_storage.conf\"",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
             "label": "Build for rpi_pico",
             "type": "shell",
-            "command": "west build -b rpi_pico -- -DCONF_FILE=\"prj_no_storage.conf\"",
+            "command": "west build -b rpi_pico -p auto -- -DCONF_FILE=\"prj_no_storage.conf\"",
             "group": {
                 "kind": "build",
                 "isDefault": true
