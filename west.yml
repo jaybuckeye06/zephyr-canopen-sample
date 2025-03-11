@@ -2,6 +2,15 @@
 # SPDX-License-Identifier: Apache-2.0
 
 manifest:
+  remotes:
+    - name: remote
+      url-base: git@ssh.dev.azure.com:v3/SimplAutomation/Zephyr
+  projects:
+    - name: boards
+      remote: remote
+      path: workspace/modules/boards
+      revision: ca741aadf97249d0138a01fe4cf5a9569d0006e5
+
   self:
     west-commands: scripts/west-commands.yml
     import: ../
