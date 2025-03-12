@@ -5,13 +5,13 @@
     "workspaceFolder": "/zephyrproject/workspace",
     "mounts": [
         "source=${localWorkspaceFolder},target=/zephyrproject/workspace,type=bind,consistency=cached",
-        "source=${localEnv:HOME}/.ssh,target=/home/user/.ssh,type=bind,consistency=cached" // 添加此行来绑定 SSH 密钥
+        "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/user/.ssh,type=bind,consistency=cached"
     ],
     "postCreateCommand": "west config manifest.path workspace && \
                           west config manifest.project-filter +canopennode && \
                           export IP=$(nslookup host.docker.internal | grep 'Address:' | grep -Eo '\\b([0-9]{1,3}\\.){3}[0-9]{1,3}\\b' | tail -n 1) && \
                           echo \"export IP=$IP\" >> ~/.bashrc && \
-                          west update && \
                           chmod 600 ~/.ssh/id_rsa && \
-                          ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts" // 添加密钥权限和 known_hosts 配置
+                          ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts && \
+                          west update"
 }
