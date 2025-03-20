@@ -1,1 +1,1 @@
-FROM jaybuckeye2006/zephyr-env:latest
+FROM waresimpleastusdevacr0.azurecr.io/zephyr-env:v3.6.0
