@@ -1,4 +1,4 @@
-FROM jaybuckeye2006/zephyr-env:v3.6.0
+FROM waresimpleastusdevacr0.azurecr.io/zephyr-env:v3.6.0
 
 # 配置 west
 RUN west config manifest.path workspace && \
